@@ -10,3 +10,17 @@ body{
     color: darkred;
     background-color: aquamarine;
 }
+
+/*Style of name of site*/
+.user {
+    font-weight: bold;
+}
+
+.logout {
+    cursor: pointer;
+    margin-left: 5px;
+}
+.site-name{
+    background-color: green;
+}
+/*End: style of name of site*/
