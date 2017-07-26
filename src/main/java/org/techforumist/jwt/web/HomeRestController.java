@@ -37,6 +37,7 @@ public class HomeRestController {
 	@Autowired
 	private AppUserRepository appUserRepository;
 
+	private String deletethis;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<AppUser> createUser(@RequestBody AppUser appUser) {
