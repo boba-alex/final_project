@@ -22,7 +22,6 @@ public class AppUser implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-
 	private String name;
 
 	@Column(unique = true)
@@ -33,6 +32,20 @@ public class AppUser implements UserDetails {
 
 	@ElementCollection
 	private List<String> roles = new ArrayList<>();
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private UserProfile userProfile;
+
+	@JsonIgnore
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public String getToStrinUserProfile() {return userProfile.toString();}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
 
 	public Long getId() {
 		return id;

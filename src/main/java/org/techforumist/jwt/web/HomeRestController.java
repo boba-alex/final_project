@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.techforumist.jwt.domain.AppUser;
+import org.techforumist.jwt.domain.UserProfile;
 import org.techforumist.jwt.repository.AppUserRepository;
 
 import io.jsonwebtoken.Jwts;
@@ -43,8 +44,11 @@ public class HomeRestController {
 			throw new RuntimeException("Username already exist");
 		}
 		List<String> roles = new ArrayList<>();
+		UserProfile userProfile = new UserProfile();
+		userProfile.setReserve(appUser.getUsername());
 		roles.add("USER");
 		appUser.setRoles(roles);
+		appUser.setUserProfile(userProfile);
 		return new ResponseEntity<AppUser>(appUserRepository.save(appUser), HttpStatus.CREATED);
 	}
 
