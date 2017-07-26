@@ -11,7 +11,7 @@ body{
     background-color: aquamarine;
 }
 
-/*Style of name of site*/
+/*Style of nav.html */
 .user {
     font-weight: bold;
 }
@@ -20,7 +20,15 @@ body{
     cursor: pointer;
     margin-left: 5px;
 }
-.site-name{
-    background-color: green;
+.navbar-brand h1{ /* site-name*/
+    font-family: 'Lora', serif;
+    color: darkred;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #222;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: .75;
 }
-/*End: style of name of site*/
+/*End: Style of nav.html*/
