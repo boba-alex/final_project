@@ -36,12 +36,9 @@ public class AppUser implements UserDetails {
 	@OneToOne(cascade = CascadeType.ALL)
 	private UserProfile userProfile;
 
-	@JsonIgnore
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}
-
-	public String getToStrinUserProfile() {return userProfile.toString();}
 
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;

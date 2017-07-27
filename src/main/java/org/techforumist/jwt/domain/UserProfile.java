@@ -1,5 +1,7 @@
 package org.techforumist.jwt.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -47,6 +49,7 @@ public class UserProfile {
         this.reserve = reserve;
     }
 
+    @JsonIgnore
     public AppUser getAppUser() {
         return appUser;
     }
