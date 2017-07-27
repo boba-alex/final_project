@@ -9,7 +9,7 @@ public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long numb;
+    private Long id;
 
     private String street;
     private String reserve;
@@ -18,19 +18,17 @@ public class UserProfile {
     @PrimaryKeyJoinColumn
     private AppUser appUser;
 
-
     public UserProfile() {
         this.street = "empty";
         this.reserve = "empty";
     }
 
-
-    public Long getNumb() {
-        return numb;
+    public Long getId() {
+        return id;
     }
 
-    public void setNumb(Long numb) {
-        this.numb = numb;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStreet() {
@@ -58,12 +56,4 @@ public class UserProfile {
         this.appUser = appUser;
     }
 
-
-    @Override
-    public String toString() {
-        return "UserProfile{" +
-                "street='" + street + '\'' +
-                ", reserve='" + reserve + '\'' +
-                '}';
-    }
 }

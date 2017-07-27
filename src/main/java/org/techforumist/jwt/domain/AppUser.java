@@ -36,6 +36,18 @@ public class AppUser implements UserDetails {
 	@OneToOne(cascade = CascadeType.ALL)
 	private UserProfile userProfile;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@ElementCollection
+	private List<Instruction> instruction;
+
+	public List<Instruction> getInstruction() {
+		return instruction;
+	}
+
+	public void setInstruction(List<Instruction> instruction) {
+		this.instruction = instruction;
+	}
+
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}

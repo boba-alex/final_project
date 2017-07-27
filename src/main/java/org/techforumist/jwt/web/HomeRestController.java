@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.techforumist.jwt.domain.AppUser;
+import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.domain.UserProfile;
 import org.techforumist.jwt.repository.AppUserRepository;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.techforumist.jwt.repository.InstructionRepository;
 
 /**
  * All web services in this controller will be available for all the users
@@ -38,17 +40,26 @@ public class HomeRestController {
 	@Autowired
 	private AppUserRepository appUserRepository;
 
+	@Autowired
+	private InstructionRepository instructionRepository;
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<AppUser> createUser(@RequestBody AppUser appUser) {
 		if (appUserRepository.findOneByUsername(appUser.getUsername()) != null) {
 			throw new RuntimeException("Username already exist");
 		}
 		List<String> roles = new ArrayList<>();
+		List<Instruction> instructions = new ArrayList<>();
+		instructions.add(new Instruction("Creator name " + appUser.getUsername()));
+		instructions.add(new Instruction("Creator name " + appUser.getUsername()));
+
 		UserProfile userProfile = new UserProfile();
 		userProfile.setReserve(appUser.getUsername());
 		roles.add("USER");
+
 		appUser.setRoles(roles);
 		appUser.setUserProfile(userProfile);
+		appUser.setInstruction(instructions);
 		return new ResponseEntity<AppUser>(appUserRepository.save(appUser), HttpStatus.CREATED);
 	}
 
