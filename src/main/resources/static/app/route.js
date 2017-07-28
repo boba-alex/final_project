@@ -69,5 +69,14 @@ angular.module('JWTDemoApp').config(function($stateProvider, $urlRouterProvider)
 				controller : 'RegisterController'
 			}
 		}
-	});
+	}).state('profile', {//for profile
+        parent : 'nav',
+        url : '/profile',
+        views : {
+            'content@' : {
+                templateUrl : 'app/views/profile.html',
+                controller : 'ProfileController'
+            }
+        }
+    });
 });
