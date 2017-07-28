@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.techforumist.jwt.domain.AppUser;
+import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.repository.AppUserRepository;
 
 /**
@@ -109,6 +110,18 @@ public class AppUserRestController {
 				&& appUserRepository.findOneByUsername(appUser.getUsername()).getId() != appUser.getId()) {
 			throw new RuntimeException("Username already exist");
 		}
+		return appUserRepository.save(appUser);
+	}
+
+	@RequestMapping(value = "/instructions", method = RequestMethod.PUT)
+	public AppUser createInstruction(@RequestBody AppUser appUser) {
+		if (appUserRepository.findOneByUsername(appUser.getUsername()) != null
+				&& appUserRepository.findOneByUsername(appUser.getUsername()).getId() != appUser.getId()) {
+			throw new RuntimeException("Username already exist");
+		}
+		Instruction instruction = new Instruction("Creator name " + appUser.getUsername());
+		appUser.getInstruction().add(instruction);
+
 		return appUserRepository.save(appUser);
 	}
 

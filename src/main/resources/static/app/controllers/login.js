@@ -23,7 +23,7 @@ angular.module('JWTDemoApp')
 				AuthService.user = res.user;
 				$rootScope.$broadcast('LoginSuccessful');
 				// going to the profile
-				$state.go('profile');
+				$state.go('home');
 			} else {
 				// if the token is not present in the response then the
 				// authentication was not successful. Setting the error message.
