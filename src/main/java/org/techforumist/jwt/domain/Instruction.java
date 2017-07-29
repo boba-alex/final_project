@@ -8,6 +8,8 @@ public class Instruction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String creatorName;
+
 
     public Instruction() {
 
@@ -17,6 +19,13 @@ public class Instruction {
         this.name = name;
     }
 
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
 
     public Long getId() {
         return id;
@@ -25,7 +34,6 @@ public class Instruction {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;

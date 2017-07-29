@@ -8,11 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.techforumist.jwt.domain.AppUser;
 import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.repository.AppUserRepository;
@@ -113,16 +110,43 @@ public class AppUserRestController {
 		return appUserRepository.save(appUser);
 	}
 
+
+	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
+	public List<AppUser> users2() {
+		return appUserRepository.findAll();
+	}
+
 	@RequestMapping(value = "/instructions", method = RequestMethod.PUT)
 	public AppUser createInstruction(@RequestBody AppUser appUser) {
+		appUser = appUserRepository.findOneByUsername(appUser.getUsername());
+		appUser.getInstruction().add(new Instruction("ADD " + appUser.getUsername()));
+		appUserRepository.save(appUser);
+
 		if (appUserRepository.findOneByUsername(appUser.getUsername()) != null
 				&& appUserRepository.findOneByUsername(appUser.getUsername()).getId() != appUser.getId()) {
 			throw new RuntimeException("Username already exist");
 		}
-		Instruction instruction = new Instruction("Creator name " + appUser.getUsername());
-		appUser.getInstruction().add(instruction);
 
 		return appUserRepository.save(appUser);
 	}
+
+	@RequestMapping(value = "/instructions2", method = RequestMethod.PUT)
+	public void createInstruction(@RequestBody Instruction instruction) {
+
+		System.out.println("This method creatorName " + instruction.getCreatorName() +
+				" name " + instruction.getName());
+
+
+		AppUser appUser = appUserRepository.findOneByUsername(instruction.getCreatorName());
+		if (appUser == null ){
+			System.out.println("null");
+			return;
+		}
+		appUser.getInstruction().add(new Instruction("Clear ADD " + appUser.getUsername()));
+		appUserRepository.save(appUser);
+
+	}
+
+
 
 }
