@@ -110,43 +110,22 @@ public class AppUserRestController {
 		return appUserRepository.save(appUser);
 	}
 
-
 	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
 	public List<AppUser> users2() {
 		return appUserRepository.findAll();
 	}
 
 	@RequestMapping(value = "/instructions", method = RequestMethod.PUT)
-	public AppUser createInstruction(@RequestBody AppUser appUser) {
-		appUser = appUserRepository.findOneByUsername(appUser.getUsername());
-		appUser.getInstruction().add(new Instruction("ADD " + appUser.getUsername()));
-		appUserRepository.save(appUser);
-
-		if (appUserRepository.findOneByUsername(appUser.getUsername()) != null
-				&& appUserRepository.findOneByUsername(appUser.getUsername()).getId() != appUser.getId()) {
-			throw new RuntimeException("Username already exist");
-		}
-
-		return appUserRepository.save(appUser);
-	}
-
-	@RequestMapping(value = "/instructions2", method = RequestMethod.PUT)
 	public void createInstruction(@RequestBody Instruction instruction) {
-
-		System.out.println("This method creatorName " + instruction.getCreatorName() +
-				" name " + instruction.getName());
-
 
 		AppUser appUser = appUserRepository.findOneByUsername(instruction.getCreatorName());
 		if (appUser == null ){
 			System.out.println("null");
 			return;
 		}
-		appUser.getInstruction().add(new Instruction("Clear ADD " + appUser.getUsername()));
+		appUser.getInstruction().add(instruction);
 		appUserRepository.save(appUser);
 
 	}
-
-
 
 }

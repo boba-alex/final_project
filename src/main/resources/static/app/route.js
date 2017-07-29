@@ -78,17 +78,17 @@ angular.module('JWTDemoApp').config(function($stateProvider, $urlRouterProvider)
                 controller : 'ProfileController'
             }
         }
-    }).state('instructions2', {
+    }).state('instructions', {
         parent : 'nav',
-        url : '/instructions2',
+        url : '/instructions',
         data : {
              role : 'ADMIN' & 'USER' //facepalm
              // role : 'ADMIN' //how user?
         },
         views : {
             'content@' : {
-                templateUrl : 'app/views/instructions2.html',
-                controller : 'Instructions2Controller'
+                templateUrl : 'app/views/instructions.html',
+                controller : 'InstructionsController'
             }
         }
     });

@@ -2,34 +2,34 @@ angular.module('JWTDemoApp')
 // Creating the Angular Controller
     .controller('InstructionsController', function($http, $scope, AuthService) {
         $scope.user = AuthService.user;
-        $scope.buttonText = 'Update0';
-        var init = function(appUser) {
+        $scope.buttonText = 'Create';
+
+        var init = function(instruction) {
             $http.get('api/instructions').success(function(res) {
                 $scope.users = res;
 
                 $scope.userForm.$setPristine();
                 $scope.message='';
-                $scope.appUser = appUser;
-                $scope.buttonText = 'Update1';
-
+                $scope.instruction = instruction;
+                $scope.buttonText = 'Create';
             }).error(function(error) {
                 $scope.message = error.message;
             });
         };
-        $scope.initEdit = function(appUser) {
-            $scope.appUser = appUser;
+        $scope.initEdit = function(instruction) {
+            $scope.instruction = instruction;
             $scope.message='';
-            $scope.buttonText = 'Update2';
+            $scope.buttonText = 'Create';
         };
         var editUser = function(){
-            $http.put('api/instructions', $scope.appUser).success(function(res) {
-                $scope.appUser = null;
+            $http.put('api/instructions', $scope.instruction).success(function(res) {
+                $scope.instruction = null;
                 $scope.confirmPassword = null;
                 $scope.userForm.$setPristine();
                 $scope.message = "Editting Success";
                 init();
             }).error(function(error) {
-                $scope.message =error.message;
+                $scope.message = error.message;
             });
         };
         $scope.submit = function() {
