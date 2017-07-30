@@ -110,12 +110,12 @@ public class AppUserRestController {
 		return appUserRepository.save(appUser);
 	}
 
-	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
+	@RequestMapping(value = "/create-instruction", method = RequestMethod.GET)
 	public List<AppUser> users2() {
 		return appUserRepository.findAll();
 	}
 
-	@RequestMapping(value = "/instructions", method = RequestMethod.PUT)
+	@RequestMapping(value = "/create-instruction", method = RequestMethod.PUT)
 	public void createInstruction(@RequestBody Instruction instruction) {
 
 		AppUser appUser = appUserRepository.findOneByUsername(instruction.getCreatorName());

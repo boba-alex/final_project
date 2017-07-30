@@ -13,8 +13,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li ng-show="user.username"><a ui-sref="profile">Profile</a></li>
-				<li ng-show="user.username"><a ui-sref="instructions">Instructions</a></li>
+				<li ng-show="user.username"><a ui-sref="create-instruction">Create instructions</a></li>
 				<li ng-show="user.username"><a ui-sref="users">Users</a></li>
+				<li ng-show="user.username"><a ui-sref="instructions">Instructions</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 
@@ -23,6 +24,7 @@
 						class="logout">Logout</span>
 				</a></li>
 				<li ng-show="!user.username"><a ui-sref="register">Register</a></li>
+				<li ng-show="!user.username"><a ui-sref="instructions">Instructions</a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

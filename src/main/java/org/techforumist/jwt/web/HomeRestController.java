@@ -50,8 +50,10 @@ public class HomeRestController {
 		}
 		List<String> roles = new ArrayList<>();
 		List<Instruction> instructions = new ArrayList<>();
-		instructions.add(new Instruction("Creator name " + appUser.getUsername()));
-		instructions.add(new Instruction("Creator name " + appUser.getUsername()));
+		Instruction instruction = new Instruction("Creator name " + appUser.getUsername());
+		instruction.setCreatorName(appUser.getUsername());
+		instructions.add(instruction);
+
 
 		UserProfile userProfile = new UserProfile();
 		userProfile.setReserve(appUser.getUsername());
@@ -87,6 +89,11 @@ public class HomeRestController {
 			tokenMap.put("token", null);
 			return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.UNAUTHORIZED);
 		}
-
 	}
+
+	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
+	public List<Instruction> users() {
+		return instructionRepository.findAll();
+	}
+
 }

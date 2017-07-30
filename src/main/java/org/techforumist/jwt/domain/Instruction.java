@@ -1,6 +1,7 @@
 package org.techforumist.jwt.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Instruction {
@@ -8,15 +9,25 @@ public class Instruction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private Date date;
     private String creatorName;
 
 
     public Instruction() {
-
+        this.date = new Date();
     }
 
     public Instruction( String name) {
+        this.date = new Date();
         this.name = name;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getCreatorName() {
