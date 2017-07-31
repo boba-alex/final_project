@@ -12,19 +12,28 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li ng-show="user.username"><a ui-sref="profile">Profile</a></li>
-				<li ng-show="user.username"><a ui-sref="create-instruction">Create instructions</a></li>
-				<li ng-show="user.username"><a ui-sref="users">Users</a></li>
-				<li ng-show="user.username"><a ui-sref="instructions">Instructions</a></li>
+				<li ng-show="user.username"><a ui-sref="profile">{{ 'PROFILE' | translate }}</a></li>
+				<li ng-show="user.username"><a ui-sref="create-instruction">{{ 'CREATE_INSTRUCTIONS' | translate }}</a></li>
+				<li ng-show="user.username"><a ui-sref="users">{{ 'USERS' | translate }}</a></li>
+				<li ng-show="user.username"><a ui-sref="instructions">{{ 'INSTRUCTIONS' | translate }}</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 
 				<li ng-show="user.username"><a> <span class="user">Hi,
 							{{user.name}}</span> <span ng-click="logout()" href=""
-						class="logout">Logout</span>
+						class="logout">{{ 'LOGOUT' | translate }}</span>
 				</a></li>
-				<li ng-show="!user.username"><a ui-sref="register">Register</a></li>
-				<li ng-show="!user.username"><a ui-sref="instructions">Instructions</a></li>
+				<li ng-show="!user.username"><a ui-sref="register">{{ 'REGISTER' | translate }}</a></li>
+				<li ng-show="!user.username"><a ui-sref="instructions">{{ 'INSTRUCTIONS' | translate }}</a></li>
+				<li>
+					<div class = "margin-top-5" ng-controller="mainCtrl">
+						<ul id="lng">
+							<li ng-class="{'selected' : currentLng('ru')}" ng-click="changeLng('ru')">Ru</li>
+							<li ng-class="{'selected' : currentLng('en')}" ng-click="changeLng('en')">En</li>
+						</ul>
+					</div>
+				</li>
+
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

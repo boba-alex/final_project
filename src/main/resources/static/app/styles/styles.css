@@ -1,6 +1,9 @@
 .margin-top-5 {
     margin-top: 10px;
 }
+.margin-left-5 {
+    margin-top: 10px;
+}
 
 .panel-scroll {
     height: 300px;
@@ -118,3 +121,24 @@ body{
 /*}*/
 
 /*!*End Profile*!*/
+
+/*Start Language Change Buttons*/
+#lng {
+    list-type-style: none;
+    margin: 0;
+    padding: 0;
+}
+#lng li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 8px;
+    background: lightgray;
+    border-radius: 5px;
+    color: #202020;
+    text-shadow: 1px 1px white;
+}
+#lng li:hover, #lng .selected{
+    background: lightblue;
+    font-weight: 700;
+}
+/*End Language Change Buttons*/

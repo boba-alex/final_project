@@ -1,5 +1,6 @@
 // Creating angular JWTDemoApp with module name "JWTDemoApp"
-angular.module('JWTDemoApp', [ 'ui.router' ])
+//add pascalprecht.translate INSIDE [ ] of ui.router
+angular.module('JWTDemoApp', [ 'ui.router' , 'pascalprecht.translate'])
 
 
 // the following method will run at the time of initializing the module. That
