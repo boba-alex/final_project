@@ -100,5 +100,14 @@ angular.module('JWTDemoApp').config(function($stateProvider, $urlRouterProvider)
                 controller : 'InstructionsController'
             }
         }
+    }).state('view-thread', {
+        parent : 'nav',
+        url : '/view-thread/{id}',
+        views : {
+            'content@' : {
+                templateUrl : 'app/views/view-thread.html',
+                controller : 'View-threadController'
+            }
+        }
     });
 });

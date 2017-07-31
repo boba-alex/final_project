@@ -15,11 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.techforumist.jwt.domain.AppUser;
 import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.domain.UserProfile;
@@ -53,7 +49,6 @@ public class HomeRestController {
 		Instruction instruction = new Instruction("Creator name " + appUser.getUsername());
 		instruction.setCreatorName(appUser.getUsername());
 		instructions.add(instruction);
-
 
 		UserProfile userProfile = new UserProfile();
 		userProfile.setReserve(appUser.getUsername());
@@ -94,6 +89,11 @@ public class HomeRestController {
 	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
 	public List<Instruction> users() {
 		return instructionRepository.findAll();
+	}
+
+	@RequestMapping(value = "/view-thread/{id}", method = RequestMethod.GET)
+	public Instruction userss(@PathVariable Long id) {
+		return instructionRepository.findOne(id);
 	}
 
 }

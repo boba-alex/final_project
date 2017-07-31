@@ -13,7 +13,12 @@ angular.module('JWTDemoApp', [ 'ui.router' ])
 		if (!AuthService.user) {
 			// To avoiding the infinite looping of state change we have to add a
 			// if condition.
-			if (toState.name != 'login' && toState.name != 'register' && toState.name != 'instructions') {
+			if (toState.name != 'login'
+				&& toState.name != 'register'
+				&& toState.name != 'instructions'
+                && toState.name != 'view-thread'
+                && toState.name != 'view-thread/{id}'
+			) {
 				event.preventDefault();
 				$state.go('login');
 			}

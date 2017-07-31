@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="col-sm-8 ">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Instructions
+				<button type="button" class="btn btn-default btn-sm"
+						ng-click="initAddUser()">
+					<span class="glyphicon glyphicon-plus"></span> New Instruction
+				</button>
+			</div>
+			<div class="panel-body">
+
+				<div class="alert alert-info margin-top-5" ng-show="deleteMessage">{{deleteMessage}}</div>
+
+				<div class="col-xs-12 col-sm-8">
+				<h2>{{user.name}}</h2>
+				<p><strong>Id: </strong> {{instruction.id}} </p>
+				<p><strong>Submitted: </strong> {{ instruction.date | date:'medium'}} </p>
+				<p><strong>Create by: </strong> {{instruction.creatorName}} </p>
+				<p><strong>Name: </strong> {{instruction.name}} </p>
+				</div>
+
+				<table class="table table-bordered">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Creator</th>
+						<th>{{nameurl}}</th>
+						<th></th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>{{$index+1}}</td>
+						<td>{{instruction.name}}</td>
+						<td>{{instruction.creatorName}}</td>
+						<td>{{ instruction.date | date:'medium'}}</td>
+						<td><button type="button" class="btn btn-default btn-sm"
+									ng-click="initEdit(instruction)">
+							<span class="glyphicon glyphicon-edit"></span>
+						</button></td>
+						<td>
+							<button type="button" class="btn btn-default btn-sm"
+									ng-click="deleteUser(instruction)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
