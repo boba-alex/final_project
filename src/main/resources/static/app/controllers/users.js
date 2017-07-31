@@ -2,7 +2,7 @@ angular.module('JWTDemoApp')
 // Creating the Angular Controller
 .controller('UsersController', function($http, $scope, AuthService) {
 	var edit = false;
-	$scope.buttonText = 'Create';
+	$scope.buttonText =  'BUTTON_CREATE_USER';
 	var init = function() {
 		$http.get('api/users').success(function(res) {
 			$scope.users = res;
@@ -10,7 +10,7 @@ angular.module('JWTDemoApp')
 			$scope.userForm.$setPristine();
 			$scope.message='';
 			$scope.appUser = null;
-			$scope.buttonText = 'Create';
+			$scope.buttonText =  'BUTTON_CREATE_USER';
 			
 		}).error(function(error) {
 			$scope.message = error.message;
@@ -20,14 +20,14 @@ angular.module('JWTDemoApp')
 		edit = true;
 		$scope.appUser = appUser;
 		$scope.message='';
-		$scope.buttonText = 'Update';
+		$scope.buttonText = 'BUTTON_UPDATE_USER';
 	};
 	$scope.initAddUser = function() {
 		edit = false;
 		$scope.appUser = null;
 		$scope.userForm.$setPristine();
 		$scope.message='';
-		$scope.buttonText = 'Create';
+		$scope.buttonText = 'BUTTON_CREATE_USER';
 	};
 	$scope.deleteUser = function(appUser) {
 		$http.delete('api/users/'+appUser.id).success(function(res) {
