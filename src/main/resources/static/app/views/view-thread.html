@@ -1,56 +1,146 @@
 <div class="row">
-	<div class="col-sm-8 ">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Instructions
-				<button type="button" class="btn btn-default btn-sm"
-						ng-click="initAddUser()">
-					<span class="glyphicon glyphicon-plus"></span> New Instruction
-				</button>
-			</div>
-			<div class="panel-body">
+    <div class="col-sm-14 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Instructions
+                <button type="button" class="btn btn-default btn-sm"
+                        ng-click="initAddUser()">
+                    <span class="glyphicon glyphicon-plus"></span> New Instruction
+                </button>
+            </div>
+            <div class="panel-body">
 
-				<div class="alert alert-info margin-top-5" ng-show="deleteMessage">{{deleteMessage}}</div>
+                <div class="alert alert-info margin-top-5" ng-show="deleteMessage">{{deleteMessage}}</div>
 
-				<div class="col-xs-12 col-sm-8">
-				<h2>{{user.name}}</h2>
-				<p><strong>Id: </strong> {{instruction.id}} </p>
-				<p><strong>Submitted: </strong> {{ instruction.date | date:'medium'}} </p>
-				<p><strong>Create by: </strong> {{instruction.creatorName}} </p>
-				<p><strong>Name: </strong> {{instruction.name}} </p>
-				</div>
+                <div class="col-xs-12 col-sm-8">
+                    <h2>{{user.name}}</h2>
+                    <p><strong>Name: </strong> {{instruction.name}} </p>
+                    <p><strong>Id: </strong> {{instruction.id}} </p>
+                    <p><strong>Submitted: </strong> {{ instruction.date | date:'medium'}} </p>
+                    <p><strong>Last edit date: </strong> {{ instruction.lastEditDate | date:'medium'}} </p>
+                    <p><strong>Create by: </strong> {{instruction.creatorName}} </p>
+                    <h1>Steps</h1>
+                </div>
 
-				<table class="table table-bordered">
-					<thead>
-					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>Creator</th>
-						<th>{{nameurl}}</th>
-						<th></th>
-						<th></th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>{{$index+1}}</td>
-						<td>{{instruction.name}}</td>
-						<td>{{instruction.creatorName}}</td>
-						<td>{{ instruction.date | date:'medium'}}</td>
-						<td><button type="button" class="btn btn-default btn-sm"
-									ng-click="initEdit(instruction)">
-							<span class="glyphicon glyphicon-edit"></span>
-						</button></td>
-						<td>
-							<button type="button" class="btn btn-default btn-sm"
-									ng-click="deleteUser(instruction)">
-								<span class="glyphicon glyphicon-trash"></span>
-							</button>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Creator</th>
+                        <th>Number of comments</th>
+                        <th>Text</th>
+                        <th>Type</th>
+                        <th>Submit</th>
+                        <th>Last edit date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="step in instruction.steps">
+                        <td>{{$index+1}}</td>
+                        <td>
+                            {{step.name}}
+                        </td>
+                        <td>{{step.creatorName}}</td>
+                        <td>{{step.stepComments.length}}</td>
+                        <td>{{step.text}}</td>
+                        <td>{{step.type}}</td>
+                        <td>{{ step.date | date:'medium'}}</td>
+                        <td>{{ step.lastEditDate | date:'medium'}}</td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="initEdit(instruction)">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm"
+                                    ng-click="deleteUser(instruction)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h1>Comments to instruction</h1>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Creator</th>
+                        <th>Text</th>
+                        <th>Posted on</th>
+                        <th>Last edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="comment in instruction.instructionComments">
+                        <td>{{comment.creatorName}}</td>
+                        <td>{{comment.text}}</td>
+                        <td>{{comment.creationDate  | date:'medium'}}</td>
+                        <td>{{comment.lastEditDate  | date:'medium'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <div class="container">
+                    <div class="row">
+                        <section class="content">
+                            <h1>Comments to instruction 2</h1>
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="pull-right">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
+                                                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
+                                                <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button>
+                                                <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
+                                            </div>
+                                        </div>
+                                        <div class="table-container">
+                                            <table class="table table-filter">
+
+                                                <tr ng-repeat="comment in instruction.instructionComments" data-status="pagado" class="selected">
+                                                    <td>
+                                                        <a href="javascript:;" class="star star-checked">
+                                                            <i class="glyphicon glyphicon-star"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="media">
+                                                            <a href="#" class="pull-left">
+                                                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <span class="media-meta pull-right">{{comment.lastEditDate | date:'medium'}}</span>
+                                                                <h4 class="title">
+                                                                    {{comment.creatorName}}
+                                                                    <span class="pull-right pagado">(Pagado)</span>
+                                                                </h4>
+                                                                <p class="summary">{{comment.text}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

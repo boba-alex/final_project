@@ -46,7 +46,7 @@ public class HomeRestController {
 		}
 		List<String> roles = new ArrayList<>();
 		List<Instruction> instructions = new ArrayList<>();
-		Instruction instruction = new Instruction("Creator name " + appUser.getUsername());
+		Instruction instruction = new Instruction("Amazing instruction from " + appUser.getUsername());
 		instruction.setCreatorName(appUser.getUsername());
 		instructions.add(instruction);
 

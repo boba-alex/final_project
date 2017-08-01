@@ -1,5 +1,6 @@
 package org.techforumist.jwt.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.techforumist.jwt.domain.AppUser;
 import org.techforumist.jwt.domain.Instruction;
+import org.techforumist.jwt.domain.Step;
+import org.techforumist.jwt.domain.comment.InstructionComment;
+import org.techforumist.jwt.domain.comment.StepComment;
 import org.techforumist.jwt.repository.AppUserRepository;
+import org.techforumist.jwt.repository.InstructionRepository;
+import org.techforumist.jwt.repository.StepRepository;
 
 /**
  * Rest controller for authentication and user details. All the web services of
@@ -26,6 +31,12 @@ import org.techforumist.jwt.repository.AppUserRepository;
 public class AppUserRestController {
 	@Autowired
 	private AppUserRepository appUserRepository;
+
+	@Autowired
+	private InstructionRepository instructionRepository;
+
+	@Autowired
+	private StepRepository stepRepository;
 
 	/**
 	 * Web service for getting all the appUsers in the application.
@@ -123,9 +134,116 @@ public class AppUserRestController {
 			System.out.println("null");
 			return;
 		}
+
 		appUser.getInstruction().add(instruction);
 		appUserRepository.save(appUser);
 
+		addStep(appUser.getInstruction().get(appUser.getInstruction().size()-1));
+	}
+
+
+
+	/*
+	ALL METHODS BELOW USED FOR TESTING.
+	THEY SHOULD BE REMOVED BEFORE THE PRODUCTION.
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	ALL METHODS BELOW USED FOR TESTING.
+	THEY SHOULD BE REMOVED BEFORE THE PRODUCTION.
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	ALL METHODS BELOW USED FOR TESTING.
+	THEY SHOULD BE REMOVED BEFORE THE PRODUCTION.
+	 */
+
+	private void addStep(Instruction instruction){
+		List<Step> steps = new ArrayList<>();
+		Step step = new Step();
+		step.setInstructionId(instruction.getId());
+		step.setName("First super step 1");
+		step.setCreatorName(instruction.getCreatorName());
+
+		Step step1 = new Step();
+		step1.setInstructionId(instruction.getId());
+		step1.setName("Small step 1");
+		step1.setCreatorName(instruction.getCreatorName());
+
+		Step step2 = new Step();
+		step2.setInstructionId(instruction.getId());
+		step2.setName("Very big and bla bla " +
+				"The term initialism uses a similar method, but the " +
+				"word is pronounced letter by letterFirst super step 1");
+		step2.setCreatorName(instruction.getCreatorName());
+
+		steps.add(step);
+		steps.add(step1);
+		steps.add(step2);
+		instruction.setSteps(steps);
+
+		instructionRepository.save(instruction);
+		addStepComments(instruction.getSteps().get(instruction.getSteps().size()-1));
+		addInstructionComments(instruction);
+	}
+
+	private void addInstructionComments(Instruction instruction){
+		List<InstructionComment> instructionComments = new ArrayList<>();
+
+		InstructionComment instructionComment = new InstructionComment();
+		instructionComment.setInstructionId(instruction.getId());
+		instructionComment.setText("All men must die !!");
+		instructionComment.setCreatorName(instruction.getCreatorName());
+
+		InstructionComment instructionComment1 = new InstructionComment();
+		instructionComment1.setInstructionId(instruction.getId());
+		instructionComment1.setText("text !!");
+		instructionComment1.setCreatorName(instruction.getCreatorName());
+
+		InstructionComment instructionComment2 = new InstructionComment();
+		instructionComment2.setInstructionId(instruction.getId());
+		instructionComment2.setText("Please note: An acronym (from Greek: " +
+				"-acro = sharp, pointed; -onym = name) in its pure form denotes" +
+				" a combination of letters (usually from an abbreviation) ");
+		instructionComment2.setCreatorName(instruction.getCreatorName());
+
+		instructionComments.add(instructionComment);
+		instructionComments.add(instructionComment1);
+		instructionComments.add(instructionComment2);
+		instruction.setInstructionComments(instructionComments);
+
+		instructionRepository.save(instruction);
+	}
+
+
+	private void addStepComments(Step step){
+
+		List<StepComment> stepComments = new ArrayList<>();
+
+		StepComment stepComment = new StepComment();
+		stepComment.setStepId(step.getId());
+		stepComment.setText("You need to rest as well as work");
+		stepComment.setCreatorName(step.getCreatorName());
+
+		StepComment stepComment1 = new StepComment();
+		stepComment1.setStepId(step.getId());
+		stepComment1.setText("You");
+		stepComment1.setCreatorName(step.getCreatorName());
+
+		StepComment stepComment2 = new StepComment();
+		stepComment2.setStepId(step.getId());
+		stepComment2.setText("To use caps for the acronyms themselves " +
+				"is generally not considered poor netiquette;");
+		stepComment2.setCreatorName(step.getCreatorName());
+
+		stepComments.add(stepComment);
+		stepComments.add(stepComment1);
+		stepComments.add(stepComment2);
+		step.setStepComments(stepComments);
+
+		stepRepository.save(step);
 	}
 
 }
