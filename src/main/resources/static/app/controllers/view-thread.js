@@ -5,6 +5,7 @@ angular.module('JWTDemoApp')
         $scope.buttonText = 'Create';
         $scope.nameurl =  'Submit';
 
+        //For comments
         $(document).ready(function () {
 
             $('.star').on('click', function () {
@@ -27,6 +28,7 @@ angular.module('JWTDemoApp')
 
         });
 
+        //For everything else
         var init = function() {
 
             var currentLocation = window.location.toString().split('/')[5];

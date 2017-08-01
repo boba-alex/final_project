@@ -12,9 +12,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.techforumist.jwt.domain.AppUser;
 import org.techforumist.jwt.domain.Instruction;
-import org.techforumist.jwt.domain.Step;
+import org.techforumist.jwt.domain.step.Step;
 import org.techforumist.jwt.domain.comment.InstructionComment;
 import org.techforumist.jwt.domain.comment.StepComment;
+import org.techforumist.jwt.domain.step.StepBlock;
 import org.techforumist.jwt.repository.AppUserRepository;
 import org.techforumist.jwt.repository.InstructionRepository;
 import org.techforumist.jwt.repository.StepRepository;
@@ -186,6 +187,7 @@ public class AppUserRestController {
 
 		instructionRepository.save(instruction);
 		addStepComments(instruction.getSteps().get(instruction.getSteps().size()-1));
+		addStepBlocks(instruction.getSteps().get(instruction.getSteps().size()-1));
 		addInstructionComments(instruction);
 	}
 
@@ -215,6 +217,40 @@ public class AppUserRestController {
 		instruction.setInstructionComments(instructionComments);
 
 		instructionRepository.save(instruction);
+	}
+
+	private void addStepBlocks(Step step){
+
+		List<StepBlock> stepBlocks = new ArrayList<>();
+
+		StepBlock stepBlock = new StepBlock();
+		stepBlock.setType("text");
+		stepBlock.setText("Hamsters are rodents belonging to the subfamily Cricetinae." +
+				" The subfamily contains about 25 species, classified in six or seven" +
+				" genera. They have become established as popular small house pets," +
+				" and, partly because they are easy to breed in captivity, hamsters are " +
+				"often used as laboratory animals.\n" +
+				"\n" +
+				"In the wild, hamsters are crepuscular and remain underground during the " +
+				"day to avoid being caught by predators. They feed primarily on seeds," +
+				" fruits, and vegetation, and will occasionally eat burrowing insects." +
+				" They have elongated cheek pouches extending to their shoulders in " +
+				"which they carry food back to their burrows.");
+
+		StepBlock stepBlock1 = new StepBlock();
+		stepBlock1.setType("image");
+		stepBlock1.setImageLink("http://res.cloudinary.com/demo/image/upload/front_face.png");
+
+		StepBlock stepBlock2 = new StepBlock();
+		stepBlock2.setType("video");
+		stepBlock2.setVideoLink("video link ");
+
+		stepBlocks.add(stepBlock);
+		stepBlocks.add(stepBlock1);
+		stepBlocks.add(stepBlock2);
+		step.setStepBlocks(stepBlocks);
+
+		stepRepository.save(step);
 	}
 
 

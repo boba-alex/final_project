@@ -11,18 +11,28 @@ angular.module('JWTDemoApp', [ 'ui.router' , 'pascalprecht.translate'])
 	// the '$stateChangeStart'.
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 		// checking the user is logged in or not
+		// // // START COMMENT
 		if (!AuthService.user) {
 			// To avoiding the infinite looping of state change we have to add a
 			// if condition.
-			if (toState.name != 'login'
-				&& toState.name != 'register'
-				&& toState.name != 'instructions'
-                && toState.name != 'view-thread'
-                && toState.name != 'view-thread/{id}'
-			) {
-				event.preventDefault();
-				$state.go('login');
-			}
+            if (!(toState.name != 'login'
+                    && toState.name != 'register'
+                    && toState.name != 'instructions'
+                    && toState.name != 'view-thread'
+                    && toState.name != 'view-thread/{id}'
+                    && toState.name != 'step'
+                    && toState.name != 'step/{id}'
+                    && toState.name != '/view-thread/step'
+                    && toState.name != 'view-thread/step/{id}'
+                    && toState.name != '/view-thread{id}/step'
+                    && toState.name != 'view-thread{id}/step/{id}'
+                    && toState.name != '/view-thread{id}/step'
+                    && toState.name != '/view-thread{id}/step/{id}'
+				)) {
+            } else {
+                event.preventDefault();
+                $state.go('login');
+            }
 		} else {
 			// checking the user is authorized to view the states
 			if (toState.data && toState.data.role) {
@@ -40,6 +50,6 @@ angular.module('JWTDemoApp', [ 'ui.router' , 'pascalprecht.translate'])
 				}
 
 			}
-		}
+		}//FINISH COMMENT
 	});
 });

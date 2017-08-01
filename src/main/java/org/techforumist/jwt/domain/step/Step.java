@@ -1,4 +1,4 @@
-package org.techforumist.jwt.domain;
+package org.techforumist.jwt.domain.step;
 
 import org.techforumist.jwt.domain.comment.StepComment;
 
@@ -11,19 +11,16 @@ public class Step {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String type; // text|image|video
-    private int number; // serial number
     private Long instructionId;
     private String name;
     private String creatorName;
 
-    @Column(length = 5000)
-    private String text;
-    private String imageLink;
-    private String videoLink;
-
     private Date creationDate;
     private Date lastEditDate;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @ElementCollection
+    private List<StepBlock> stepBlocks;
 
     @OneToMany(cascade = CascadeType.ALL)
     @ElementCollection
@@ -91,43 +88,11 @@ public class Step {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public List<StepBlock> getStepBlocks() {
+        return stepBlocks;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
-    public String getVideoLink() {
-        return videoLink;
-    }
-
-    public void setVideoLink(String videoLink) {
-        this.videoLink = videoLink;
+    public void setStepBlocks(List<StepBlock> stepBlocks) {
+        this.stepBlocks = stepBlocks;
     }
 }

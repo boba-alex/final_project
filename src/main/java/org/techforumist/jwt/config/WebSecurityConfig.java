@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// "/favicon.ico"
 				.antMatchers("/", "/index.html", "/app/**", "/register",
 						"/instructions", "/view-thread", "/view-thread/{id}",
-						"/authenticate", "/favicon.ico");
+						"/step" ,"/step/{id}", "/authenticate", "/favicon.ico");
 	}
 
 	// This method is used for override HttpSecurity of the web Application.

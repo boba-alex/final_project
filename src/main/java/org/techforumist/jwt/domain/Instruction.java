@@ -1,9 +1,9 @@
 package org.techforumist.jwt.domain;
 
 import org.techforumist.jwt.domain.comment.InstructionComment;
+import org.techforumist.jwt.domain.step.Step;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

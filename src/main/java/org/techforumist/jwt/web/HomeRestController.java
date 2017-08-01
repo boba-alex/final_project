@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.techforumist.jwt.domain.AppUser;
 import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.domain.UserProfile;
+import org.techforumist.jwt.domain.step.Step;
 import org.techforumist.jwt.repository.AppUserRepository;
 
 import io.jsonwebtoken.Jwts;
@@ -96,4 +97,17 @@ public class HomeRestController {
 		return instructionRepository.findOne(id);
 	}
 
+	@RequestMapping(value = "/step/{id}", method = RequestMethod.GET)
+	public Step step(@PathVariable String id) {
+		Instruction instruction = instructionRepository.findOne(Long.parseLong(id.split(" ")[0]));
+		return instruction.getSteps().get(Integer.parseInt(id.split(" ")[1])-1);
+	}
+
+
+	@RequestMapping(value = "/test{id}", method = RequestMethod.GET)
+	public Instruction test(@PathVariable String id)
+	{
+		System.out.println(" " + id);
+		return null;
+	}
 }
