@@ -19,6 +19,7 @@
                     <p><strong>Submitted: </strong> {{ instruction.creationDate | date:'medium'}} </p>
                     <p><strong>Last edit date: </strong> {{ instruction.lastEditDate | date:'medium'}} </p>
                     <p><strong>Create by: </strong> {{instruction.creatorName}} </p>
+                    <p><strong>Rating: </strong> {{instruction.rating}} </p>
                     <h1>Steps</h1>
                 </div>
 
@@ -130,6 +131,7 @@
                                         </div>
                                         <div ng-controller="RatingController as rating" class="container">
                                             <h1>Angular Star Rating Directive</h1>
+                                            <!--<div star-rating ng-model="rating.rating1" max="10" on-rating-select="rating.rateFunction(rating)"></div>-->
                                             <div star-rating ng-model="rating.rating1" max="10" on-rating-select="rating.rateFunction(rating)"></div>
                                             <star-rating ng-model="rating.rating2" readonly="rating.isReadonly"></star-rating>
                                             <label>
@@ -137,7 +139,7 @@
                                                 Is Readonly
                                             </label>
 
-                                            <div><strong>Rating 1:</strong> {{rating.rating1}}</div>
+                                            <div><strong>Rating 1:</strong> {{instruction.rating}}</div>
                                             <div><strong>Rating 2:</strong> {{rating.rating2}}</div>
                                         </div>
                                     </div>

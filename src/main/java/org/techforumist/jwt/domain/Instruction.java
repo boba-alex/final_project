@@ -5,7 +5,9 @@ import org.techforumist.jwt.domain.step.Step;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Instruction {
@@ -25,15 +27,45 @@ public class Instruction {
     @ElementCollection
     private List<InstructionComment> instructionComments;
 
+    private int rating;
+    private HashMap<Long, Integer> ratingMap;// = new HashMap<Long, Integer>();
+
     public Instruction() {
         this.creationDate = new Date();
         this.lastEditDate = this.creationDate;
+        this.ratingMap = new HashMap<>();
     }
 
     public Instruction(String name) {
         this.creationDate = new Date();
         this.lastEditDate = this.creationDate;
         this.name = name;
+        this.ratingMap = new HashMap<>();
+    }
+
+    public void calclucateRating(Long userId, Integer value) {
+        ratingMap.put(userId, value);
+        int result = 0;
+        for (Integer integer : ratingMap.values()) {
+            result += integer ;
+        }
+        rating = result / ratingMap.size();
+    }
+
+    public HashMap<Long, Integer> getRatingMap() {
+        return ratingMap;
+    }
+
+    public void setRatingMap(HashMap<Long, Integer> ratingMap) {
+        this.ratingMap = ratingMap;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public Date getLastEditDate() {
