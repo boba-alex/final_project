@@ -1,4 +1,4 @@
-package org.techforumist.jwt.domain;
+package org.techforumist.jwt.domain.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import org.techforumist.jwt.domain.Instruction;
 
 
 @Entity
@@ -39,6 +40,32 @@ public class AppUser implements UserDetails {
 	@OneToMany(cascade = CascadeType.ALL)
 	@ElementCollection
 	private List<Instruction> instruction;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@ElementCollection
+	List<Achievement> achievements;
+
+	public AppUser() {
+		this.achievements = new ArrayList<>();
+	}
+
+	@JsonIgnore
+	public boolean findAchievementByname(String name){
+		for (Achievement achievement:achievements) {
+			if(achievement.getName().equals(name)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public List<Achievement> getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(List<Achievement> achievements) {
+		this.achievements = achievements;
+	}
 
 	public List<Instruction> getInstruction() {
 		return instruction;

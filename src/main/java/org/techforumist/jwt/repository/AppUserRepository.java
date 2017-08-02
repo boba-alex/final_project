@@ -1,7 +1,7 @@
 package org.techforumist.jwt.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.techforumist.jwt.domain.AppUser;
+import org.techforumist.jwt.domain.user.AppUser;
 
 import java.util.List;
 

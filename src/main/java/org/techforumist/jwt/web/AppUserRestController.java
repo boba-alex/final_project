@@ -10,12 +10,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.techforumist.jwt.domain.AppUser;
+import org.techforumist.jwt.domain.user.Achievement;
+import org.techforumist.jwt.domain.user.AchievementController;
+import org.techforumist.jwt.domain.user.AppUser;
 import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.domain.step.Step;
 import org.techforumist.jwt.domain.comment.InstructionComment;
 import org.techforumist.jwt.domain.comment.StepComment;
 import org.techforumist.jwt.domain.step.StepBlock;
+import org.techforumist.jwt.repository.AchievementRepository;
 import org.techforumist.jwt.repository.AppUserRepository;
 import org.techforumist.jwt.repository.InstructionRepository;
 import org.techforumist.jwt.repository.StepRepository;
@@ -38,6 +41,9 @@ public class AppUserRestController {
 
 	@Autowired
 	private StepRepository stepRepository;
+
+	@Autowired
+	private AchievementRepository achievementRepository;
 
 	/**
 	 * Web service for getting all the appUsers in the application.
@@ -137,6 +143,7 @@ public class AppUserRestController {
 		}
 
 		appUser.getInstruction().add(instruction);
+		chekAchivements(appUser.getUsername());
 		appUserRepository.save(appUser);
 
 		addStep(appUser.getInstruction().get(appUser.getInstruction().size()-1));
@@ -160,6 +167,58 @@ public class AppUserRestController {
 	ALL METHODS BELOW USED FOR TESTING.
 	THEY SHOULD BE REMOVED BEFORE THE PRODUCTION.
 	 */
+
+	private void chekAchivements(String userName){
+
+		AppUser appUser = appUserRepository.findOneByUsername(userName);
+
+        if (appUser.getInstruction().size() > 0 ){
+        	String achievementName = "Bronze instruction creator";
+        	if(appUser.findAchievementByname(achievementName)){
+
+			} else {
+				Achievement achievement = new Achievement();
+				achievement.setUsername(userName);
+				achievement.setName(achievementName);
+				achievement.setDescription("For make 0 instruction !!!");
+				achievement.setImageLink("http://res.cloudinary.com/demo/image/upload/pg_3/strawberries.png");
+				appUser.getAchievements().add(achievement);
+			}
+        }
+
+		if (appUser.getInstruction().size() > 0 ){
+			String achievementName = "Silver instruction creator";
+			if(appUser.findAchievementByname(achievementName)){
+
+			} else {
+				Achievement achievement = new Achievement();
+				achievement.setUsername(userName);
+				achievement.setName(achievementName);
+				achievement.setDescription("For make 0 instruction !!");
+				achievement.setImageLink("http://res.cloudinary.com/demo/image/upload/pg_3/strawberries.png");
+				appUser.getAchievements().add(achievement);
+			}
+		}
+
+		for (Instruction instruction:instructionRepository.findAllByCreatorName(userName)) {
+			if (instruction.getSteps().size() > 0 ){
+				String achievementName = "Bronze step creator";
+				if(appUser.findAchievementByname(achievementName)){
+					return;
+				} else {
+					Achievement achievement = new Achievement();
+					achievement.setUsername(userName);
+					achievement.setName(achievementName);
+					achievement.setDescription("For make 0 steps !!!");
+					achievement.setImageLink("http://res.cloudinary.com/demo/image/upload/w_200," +
+							"h_200,c_crop,g_auto/fat_cat.jpg");
+					appUser.getAchievements().add(achievement);
+				}
+			}
+		}
+
+		appUserRepository.save(appUser);
+	}
 
 	private void addStep(Instruction instruction){
 		List<Step> steps = new ArrayList<>();

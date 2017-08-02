@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface InstructionRepository extends JpaRepository<Instruction, Long> {
     public List<Instruction> findAll();
+    public List<Instruction> findAllByCreatorName(String creatorName);
 }

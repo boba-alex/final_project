@@ -1,8 +1,10 @@
-package org.techforumist.jwt.domain;
+package org.techforumist.jwt.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UserProfile {
@@ -10,18 +12,17 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String street;
-    private String reserve;
-
     @OneToOne
     @PrimaryKeyJoinColumn
     private AppUser appUser;
+    private String street;
+    private String reserve;
 
     public UserProfile() {
         this.street = "empty";
         this.reserve = "empty";
     }
+
 
     public Long getId() {
         return id;

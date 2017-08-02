@@ -3,40 +3,16 @@
         <div class="well profile">
             <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-8">
-                    <h2>{{user.name}}</h2>
+                    <h2>Hello {{user.name}}</h2>
                     <p><strong>Обо мне: </strong> Веб-дизайнер. </p>
                     <p><strong>Street: </strong> {{user.userProfile.street}} </p>
                     <p><strong>Reserve: </strong> {{user.userProfile.reserve}} </p>
-                    <p><strong>Знания: </strong>
+                    <p><strong>{{user.achievements.length}}: Length </strong>
                         <span class="tags">HTML5</span>
                         <span class="tags">CSS3</span>
                         <span class="tags">jQuery</span>
                         <span class="tags">Bootstrap</span>
                     </p>
-                </div>
-                <div class="col-xs-12 col-sm-4 text-center">
-                    <figure>
-                        <img src="/user-profile.jpg" alt="user" class="img-circle img-responsive">
-                        <figcaption class="ratings">
-                            <p>Рейтинг
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="fa fa-star"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="fa fa-star-o"></span>
-                                </a>
-                            </p>
-                        </figcaption>
-                    </figure>
                 </div>
             </div>
             <div class="col-xs-12 divider text-center">
@@ -70,7 +46,25 @@
                     </div>
                 </div>
             </div>
+
+            <body>
+            <div class="image-container">
+
+                <div ng-repeat="achievement in user.achievements" data-status="pagado" class="selected">
+                <td>
+                    <div class="tile" style="background-image: url({{achievement.imageLink}});">
+                        <div class="image-title"><h3>{{achievement.name}}</h3>
+                            {{achievement.description}}
+                        </div>
+                    </div>
+                </td>
+                </div>
+
+
+
+            </div>
+            </body>
+
         </div>
     </div>
-</div>
 </div>

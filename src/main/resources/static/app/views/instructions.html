@@ -26,6 +26,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="instruction in instructions">
+                    <!--<tr ng-repeat="instruction in user.achievements">-->
                         <td>{{$index+1}}</td>
                         <td>
                             <a href="#/view-thread/{{instruction.id}}" target="_blank">{{instruction.name}}</a>
@@ -33,7 +34,7 @@
                         <td>{{instruction.creatorName}}</td>
                         <td>{{instruction.steps.length}}</td>
                         <td>{{instruction.instructionComments.length}}</td>
-                        <td>{{ instruction.date | date:'medium'}}</td>
+                        <td>{{ instruction.creationDate | date:'medium'}}</td>
                         <td><button type="button" class="btn btn-default btn-sm"
                                     ng-click="initEdit(instruction)">
                             <span class="glyphicon glyphicon-edit"></span>

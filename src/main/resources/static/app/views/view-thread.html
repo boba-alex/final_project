@@ -30,7 +30,6 @@
                         <th>Creator</th>
                         <th>Number of comments</th>
                         <th>Text</th>
-                        <th>Type</th>
                         <th>Submit</th>
                         <th>Last edit date</th>
                         <th></th>
@@ -46,8 +45,7 @@
                         <td>{{step.creatorName}}</td>
                         <td>{{step.stepComments.length}}</td>
                         <td>{{step.text}}</td>
-                        <td>{{step.type}}</td>
-                        <td>{{ step.date | date:'medium'}}</td>
+                        <td>{{ step.creationDate | date:'medium'}}</td>
                         <td>{{ step.lastEditDate | date:'medium'}}</td>
                         <td>
                             <button type="button" class="btn btn-default btn-sm"
@@ -147,10 +145,8 @@
                             </div>
                         </section>
 
+                        </div>
                     </div>
-                </div>
-
-
                 </div>
             </div>
         </div>

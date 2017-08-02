@@ -16,9 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.techforumist.jwt.domain.AppUser;
+import org.techforumist.jwt.domain.user.AppUser;
 import org.techforumist.jwt.domain.Instruction;
-import org.techforumist.jwt.domain.UserProfile;
+import org.techforumist.jwt.domain.user.UserProfile;
 import org.techforumist.jwt.domain.step.Step;
 import org.techforumist.jwt.repository.AppUserRepository;
 

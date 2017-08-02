@@ -38,6 +38,99 @@ body{
 
 /*End: Style of nav.html*/
 
+/*HERE START it is for image at profile*/
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body { /* For full width image-container */
+    margin: 0 0 0 0;
+}
+
+.tile {
+    width: 20%;
+    height: auto;
+    display: inline-block;
+    background-size: cover;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    padding: 0 0 19% 0;
+    background-position: center;
+}
+
+.image-title {
+    width: 100%;
+    height: 25%;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 1rem 1rem;
+    font-size: .9em;
+    font-family:"Helvetica";
+    text-align: center;
+    line-height: 1em;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.tile .image-title {
+    transition: 0.8s ease;
+}
+
+
+/* Hover effect on image tiles */
+
+.tile:hover .image-title {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 40%;
+}
+
+
+/* Pop up CSS light box */
+
+
+
+/* Responsive tiles starts here. Breaking points: 1280, 1024, 600, 360 */
+
+@media screen and (max-width: 1280px) {
+    .image-container .tile {
+        width: 25%;
+        padding-bottom: 25%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .image-container .tile {
+        width: 33.33%;
+        padding-bottom: 33.33%;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .image-container .tile {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .image-container .tile {
+        width: 50%;
+        padding-bottom: 50%;
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .image-container .tile {
+        width: 100%;
+        padding-bottom: 100%;
+    }
+}
+/*HERE END for image at profile*/
+
 /* - because bleeding from eyes*/
 /*!*Start Profile*!*/
 /*@import url(http://fonts.googleapis.com/css?family=Lato:400,700);*/
