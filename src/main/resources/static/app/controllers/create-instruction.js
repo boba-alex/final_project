@@ -2,7 +2,7 @@ angular.module('JWTDemoApp')
 // Creating the Angular Controller
     .controller('CreateInstructionController', function($http, $scope, AuthService) {
         $scope.user = AuthService.user;
-        $scope.buttonText = 'Create';
+        $scope.buttonText = 'CREATE';
 
         var init = function(instruction) {
             $http.get('api/create-instruction').success(function(res) {
@@ -11,7 +11,7 @@ angular.module('JWTDemoApp')
                 $scope.userForm.$setPristine();
                 $scope.message='';
                 $scope.instruction = instruction;
-                $scope.buttonText = 'Create';
+                $scope.buttonText = 'CREATE';
             }).error(function(error) {
                 $scope.message = error.message;
             });
@@ -19,7 +19,7 @@ angular.module('JWTDemoApp')
         $scope.initEdit = function(instruction) {
             $scope.instruction = instruction;
             $scope.message='';
-            $scope.buttonText = 'Create';
+            $scope.buttonText = 'CREATE';
         };
         var editUser = function(){
             $http.put('api/create-instruction', $scope.instruction).success(function(res) {

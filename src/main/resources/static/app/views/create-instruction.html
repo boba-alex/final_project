@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-sm-6 ">
         <div class="panel panel-default">
-            <div class="panel-heading">Add instruction</div>
+            <div class="panel-heading">{{'ADD_INSTRUCTION' | translate}}</div>
             <div class="panel-body">
                 <div class="col-md-12">
                     <form ng-submit="submit()" name="userForm" novalidate>
                         <div class="form-group">
-                            <label for="name">Creator:</label> <label
+                            <label for="name">{{'CREATOR' | translate}}:</label> <label
                                                                    ng-model="instruction.creatorName=user.username"
                                                                    id="creatorName"
                                                                    name="name">{{user.username}}</label>
@@ -14,14 +14,14 @@
 
                         <div class="form-group"
                              ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
-                            <label for="name">Instruction name:</label> <input type="text" required
+                            <label for="name">{{'NAME_OF_INSTRUCTION' | translate}}:</label> <input type="text" required
                                                                    class="form-control" ng-model="instruction.name"
                                                                    id="name"
                                                                    name="name">
                         </div>
                         <div class="form-group"
                              ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
-                            <label for="name">Instruction tags:</label> <input type="text" required
+                            <label for="name">{{'TAGS_OF_INSTRUCTION' | translate}}:</label> <input type="text" required
                                                                                class="form-control" ng-model="instruction.tags"
                                                                                id="tags"
                                                                                name="tags">
@@ -29,14 +29,14 @@
 
                         <div class="form-group"
                              ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
-                            <label for="name">Instruction category:</label> <input type="text" required
+                            <label for="name">{{'CATEGORY_OF_INSTRUCTION' | translate}}:</label> <input type="text" required
                                                                                class="form-control" ng-model="instruction.category"
                                                                                id="category"
                                                                                name="category">
                         </div>
 
                         <button type="submit" class="btn btn-default"
-                                ng-disabled="userForm.$invalid">{{buttonText}}
+                                ng-disabled="userForm.$invalid">{{buttonText | translate}}
                         </button>
                         <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
                     </form>

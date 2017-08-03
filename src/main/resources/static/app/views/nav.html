@@ -19,7 +19,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 
-				<li ng-show="user.username"><a> <span class="user">Hi,
+				<li ng-show="user.username"><a> <span class="user">{{ 'HI' | translate }},
 							{{user.name}}</span> <span ng-click="logout()" href=""
 						class="logout">{{ 'LOGOUT' | translate }}</span>
 				</a></li>
@@ -28,8 +28,8 @@
 				<li>
 					<div class = "margin-top-5" ng-controller="TranslateController">
 						<ul id="lng">
-							<li translate="BUTTON_LANG_RU" ng-class="{'selected' : currentLng('ru')}" ng-click="changeLng('ru')"></li>
-							<li translate="BUTTON_LANG_EN" ng-class="{'selected' : currentLng('en')}" ng-click="changeLng('en')"></li>
+							<li ng-class="{'selected' : currentLng('ru')}" ng-click="changeLng('ru')">РУ</li>
+							<li ng-class="{'selected' : currentLng('en')}" ng-click="changeLng('en')">EN</li>
 						</ul>
 					</div>
 				</li>
