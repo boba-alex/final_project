@@ -5,9 +5,8 @@ angular.module('JWTDemoApp')
         $scope.buttonText = 'Create';
 
         var init = function() {
-            $http.get('instructions').success(function(res) {
+            $http.get('instructions' ).success(function(res) {
                 $scope.instructions = res;
-
                 $scope.message='';
                 $scope.appUser = null;
                 $scope.buttonText = 'Create';

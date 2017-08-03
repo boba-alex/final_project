@@ -136,6 +136,8 @@ public class AppUserRestController {
 	@RequestMapping(value = "/create-instruction", method = RequestMethod.PUT)
 	public void createInstruction(@RequestBody Instruction instruction) {
 
+		System.out.println(instruction.getName() + " " + instruction.getCategory() +
+				" " +instruction.getTags());
 		AppUser appUser = appUserRepository.findOneByUsername(instruction.getCreatorName());
 		if (appUser == null ){
 			System.out.println("null");

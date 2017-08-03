@@ -8,9 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -88,9 +90,16 @@ public class HomeRestController {
 	}
 
 	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
-	public List<Instruction> users() {
+	@ResponseBody
+	public List<Instruction> users( String c ) {
+
+//		String t = httpServletRequest.getParameter("t1");
+		System.out.println("search: " + c + "");
 		return instructionRepository.findAll();
 	}
+
+
+
 
 	@RequestMapping(value = "/view-thread/{id}", method = RequestMethod.GET)
 	public Instruction userss(@PathVariable Long id) {

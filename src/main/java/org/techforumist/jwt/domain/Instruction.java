@@ -4,10 +4,7 @@ import org.techforumist.jwt.domain.comment.InstructionComment;
 import org.techforumist.jwt.domain.step.Step;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class Instruction {
@@ -27,6 +24,9 @@ public class Instruction {
     @ElementCollection
     private List<InstructionComment> instructionComments;
 
+    private String tags;
+    private String category;
+
     private int rating;
     private HashMap<Long, Integer> ratingMap;// = new HashMap<Long, Integer>();
 
@@ -34,6 +34,8 @@ public class Instruction {
         this.creationDate = new Date();
         this.lastEditDate = this.creationDate;
         this.ratingMap = new HashMap<>();
+//        this.tags = new ArrayList<>();
+//        this.tags = new String[10];
     }
 
     public Instruction(String name) {
@@ -50,6 +52,22 @@ public class Instruction {
             result += integer ;
         }
         rating = result / ratingMap.size();
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public HashMap<Long, Integer> getRatingMap() {

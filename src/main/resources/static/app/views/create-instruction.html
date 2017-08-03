@@ -19,6 +19,21 @@
                                                                    id="name"
                                                                    name="name">
                         </div>
+                        <div class="form-group"
+                             ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
+                            <label for="name">Instruction tags:</label> <input type="text" required
+                                                                               class="form-control" ng-model="instruction.tags"
+                                                                               id="tags"
+                                                                               name="tags">
+                        </div>
+
+                        <div class="form-group"
+                             ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
+                            <label for="name">Instruction category:</label> <input type="text" required
+                                                                               class="form-control" ng-model="instruction.category"
+                                                                               id="category"
+                                                                               name="category">
+                        </div>
 
                         <button type="submit" class="btn btn-default"
                                 ng-disabled="userForm.$invalid">{{buttonText}}
