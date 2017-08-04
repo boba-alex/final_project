@@ -1,9 +1,10 @@
 angular.module('JWTDemoApp')
 // Creating the Angular Controller
     .controller('View-threadController', function($http, $scope, AuthService) {
-        var edit = false;
-        $scope.buttonText = 'Create';
+        var edit = true;
+        $scope.buttonText = 'Create step';
         $scope.nameurl =  'Submit';
+        $scope.user = AuthService.user;
 
         //For comments
         $(document).ready(function () {
@@ -38,27 +39,28 @@ angular.module('JWTDemoApp')
 
                 $scope.message='';
                 $scope.appUser = null;
-                $scope.buttonText = 'Create';
+                // $scope.buttonText = 'Create';
 
             }).error(function(error) {
                 $scope.message = error.message;
             });
         };
-        $scope.initEdit = function(instruction) {
+        $scope.initEdit = function(step) {
             edit = true;
-            $scope.instruction = instruction;
+            $scope.step = step;
             $scope.message='';
-            $scope.buttonText = 'Update';
+            // $scope.buttonText = 'Update';
         };
         $scope.initAddUser = function() {
             edit = false;
             $scope.instruction = null;
 
             $scope.message='';
-            $scope.buttonText = 'Create';
+            // $scope.buttonText = 'Create';
         };
-        $scope.deleteUser = function(instruction) {
-            $http.delete('view-thread/'+instruction.id).success(function(res) {
+        $scope.deleteUser = function(step) {
+            var currentLocation = window.location.toString().split('/')[5];
+            $http.delete('view-thread/'+ currentLocation + '/' + step.id + '/' + AuthService.user.id).success(function(res) {
                 $scope.deleteMessage ="Success!";
                 init();
             }).error(function(error) {
@@ -66,8 +68,9 @@ angular.module('JWTDemoApp')
             });
         };
         var editUser = function(){
-            $http.put('view-thread', $scope.instruction).success(function(res) {
-                $scope.instruction = null;
+            var currentLocation = window.location.toString().split('/')[5];
+            $http.put('view-thread/' + currentLocation, $scope.step).success(function(res) {
+                $scope.step = null;
                 $scope.confirmPassword = null;
                 $scope.userForm.$setPristine();
                 $scope.message = "Editting Success";

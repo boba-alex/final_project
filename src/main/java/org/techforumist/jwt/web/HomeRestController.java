@@ -27,6 +27,7 @@ import org.techforumist.jwt.repository.AppUserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.techforumist.jwt.repository.InstructionRepository;
+import org.techforumist.jwt.repository.StepRepository;
 
 /**
  * All web services in this controller will be available for all the users
@@ -41,6 +42,9 @@ public class HomeRestController {
 
 	@Autowired
 	private InstructionRepository instructionRepository;
+
+	@Autowired
+	private StepRepository stepRepository;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<AppUser> createUser(@RequestBody AppUser appUser) {
@@ -90,16 +94,49 @@ public class HomeRestController {
 	}
 
 	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Instruction> users( String c ) {
-
-//		String t = httpServletRequest.getParameter("t1");
-		System.out.println("search: " + c + "");
+	public List<Instruction> users() {
 		return instructionRepository.findAll();
 	}
 
+	@RequestMapping(value = "/view-thread/{id}", method = RequestMethod.PUT)
+	public void createStep(@PathVariable Long id, @RequestBody Step step) {
+		Instruction instruction = instructionRepository.findOne(id);
+		if(step.getCreatorName() != null) {
+			if (step.getCreatorName().equals(instruction.getCreatorName())) {
+				step.setInstructionId(instruction.getId());
+				instruction.getSteps().add(step);
+				instructionRepository.save(instruction);
+			} else {
+				AppUser appUser = appUserRepository.findOneByUsername(step.getCreatorName());
+				if (appUser.getRoles().contains("ADMIN")) {
+					step.setInstructionId(instruction.getId());
+					instruction.getSteps().add(step);
+					instructionRepository.save(instruction);
+				}
+			}
+		}
+	}
 
-
+	@RequestMapping(value = "/view-thread/{id}/{stepID}/{userID}", method = RequestMethod.DELETE)
+	public void deleteStep(@PathVariable Long id, @PathVariable Long stepID, @PathVariable Long userID) {
+		Step step = stepRepository.findOne(stepID);
+		Instruction instruction = instructionRepository.findOne(id);
+		AppUser appUser = appUserRepository.findOne(userID);
+		if(instruction.getCreatorName().equals(appUser.getUsername())){
+			List<Step> steps = instruction.getSteps();
+			steps.remove(step);
+			instruction.setSteps(steps);
+			instructionRepository.save(instruction);
+			stepRepository.delete(step);
+			return;
+		} else if(appUser.getRoles().contains("ADMIN")){
+			List<Step> steps = instruction.getSteps();
+			steps.remove(step);
+			instruction.setSteps(steps);
+			instructionRepository.save(instruction);
+			stepRepository.delete(step);;
+		}
+	}
 
 	@RequestMapping(value = "/view-thread/{id}", method = RequestMethod.GET)
 	public Instruction userss(@PathVariable Long id) {

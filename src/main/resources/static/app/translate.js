@@ -12,6 +12,7 @@ angular.module('JWTDemoApp')
             CREATE_INSTRUCTIONS: 'Create instructions',
             HI: 'Hi',
             LOGOUT: 'Logout',
+            LOGIN: 'Login',
             //users
             USER: 'User',
             NAME: 'Name',
@@ -46,6 +47,7 @@ angular.module('JWTDemoApp')
             CREATE_INSTRUCTIONS: 'Создать инструкции',
             HI: 'Привет',
             LOGOUT: 'Выйти',
+            LOGIN: 'Войти',
             //users
             USER: 'Пользователь',
             NAME: 'Имя',

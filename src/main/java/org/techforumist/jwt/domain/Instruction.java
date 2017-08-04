@@ -34,6 +34,8 @@ public class Instruction {
         this.creationDate = new Date();
         this.lastEditDate = this.creationDate;
         this.ratingMap = new HashMap<>();
+        this.steps = new ArrayList<>();
+        this.instructionComments = new ArrayList<>();
 //        this.tags = new ArrayList<>();
 //        this.tags = new String[10];
     }
@@ -43,6 +45,8 @@ public class Instruction {
         this.lastEditDate = this.creationDate;
         this.name = name;
         this.ratingMap = new HashMap<>();
+        this.steps = new ArrayList<>();
+        this.instructionComments = new ArrayList<>();
     }
 
     public void calclucateRating(Long userId, Integer value) {
