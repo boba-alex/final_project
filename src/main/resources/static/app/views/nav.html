@@ -30,6 +30,7 @@
 						<ul id="lng">
 							<li ng-class="{'selected' : currentLng('ru')}" ng-click="changeLng('ru')">РУ</li>
 							<li ng-class="{'selected' : currentLng('en')}" ng-click="changeLng('en')">EN</li>
+							<li><div class="ui button aligned center teal" ng-controller="PDFController" ng-click="exportToPDF()" >PDF</div></li>
 						</ul>
 					</div>
 				</li>
