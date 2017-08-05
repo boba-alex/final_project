@@ -3,11 +3,11 @@
         <div class="well profile">
             <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-8">
-                    <h2>Hello {{user.name}}</h2>
-                    <p><strong>Обо мне: </strong> Веб-дизайнер. </p>
-                    <p><strong>Street: </strong> {{user.userProfile.street}} </p>
+                    <h2>{{'USER' | translate}}: {{user.name}}</h2>
+                    <p><strong>{{'ABOUT_ME' | translate}}: </strong> Веб-дизайнер. </p>
+                    <p><strong>{{'ADDRESS' | translate}}: </strong> {{user.userProfile.street}} </p>
                     <p><strong>Reserve: </strong> {{user.userProfile.reserve}} </p>
-                    <p><strong>{{user.achievements.length}}: Length </strong>
+                    <p><strong>{{user.achievements.length}}  {{'ACHIEVEMENTS' | translate}} </strong>
                         <span class="tags">HTML5</span>
                         <span class="tags">CSS3</span>
                         <span class="tags">jQuery</span>

@@ -12,11 +12,10 @@
 body{
     color: darkred;
     background-color: #003399;
+    /*background-image: url("http://900igr.net/datai/astronomija/Den-kosmonavtiki-2012/0001-002-Den-kosmonavtiki-2012.jpg");*/
+    /*background-image: url(http://www.lenagold.ru/fon/ori/nebo/cher/star21.gif); !*if we want gif*!*/
+    /*background-image: url("https://im0-tub-by.yandex.net/i?id=d5d584213e571e9678323e884c466b25&n=33&h=215&w=344");*/
     height: 100%;
-}
-.wrap{
-    width: 80%;
-    margin: auto;
 }
 footer{
     margin-top: 20%;

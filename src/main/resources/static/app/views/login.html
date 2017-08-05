@@ -1,20 +1,20 @@
 <div class=" col-md-4 col-md-offset-4">
     <div class="panel panel-default">
-        <div class="panel-heading">Login</div>
+        <div class="panel-heading">{{'LOGIN' | translate}}</div>
         <div class="panel-body">
             <div class="col-md-12">
                 <form ng-submit="login()">
                     <div class="form-group">
-                        <label for="username">Username:</label> <input type="txt"
+                        <label for="username">{{'USERNAME' | translate}}:</label> <input type="txt"
                                                                        class="form-control" ng-model="username"
                                                                        id="username">
                     </div>
                     <div class="form-group">
-                        <label for="pwd">Password:</label> <input type="password"
+                        <label for="pwd">{{'PASSWORD' | translate}}:</label> <input type="password"
                                                                   class="form-control" id="pwd" ng-model="password">
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                    <button class="btn btn-default" ui-sref="register">Register</button>
+                    <button type="submit" class="btn btn-default">{{'SUBMIT' | translate}}</button>
+                    <button class="btn btn-default" ui-sref="register">{{'REGISTER' | translate}}</button>
 
                     <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
                 </form>
