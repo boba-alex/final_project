@@ -13,9 +13,10 @@
                         <label for="pwd">{{'PASSWORD' | translate}}:</label> <input type="password"
                                                                   class="form-control" id="pwd" ng-model="password">
                     </div>
-                    <button type="submit" class="btn btn-default">{{'SUBMIT' | translate}}</button>
-                    <button class="btn btn-default" ui-sref="register">{{'REGISTER' | translate}}</button>
-
+                        <div align="center">
+                            <button type="submit" class="btn btn-primary">{{'SUBMIT' | translate}}</button>
+                            <button class="btn btn-info" ui-sref="register">{{'REGISTER' | translate}}</button>
+                        </div>
                     <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
                 </form>
             </div>
