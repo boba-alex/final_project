@@ -3,6 +3,7 @@ package org.techforumist.jwt.domain.step;
 import org.techforumist.jwt.domain.comment.StepComment;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class Step {
     public Step() {
         this.creationDate = new Date();
         this.lastEditDate = this.creationDate;
+        this.stepComments = new ArrayList<>();
+        this.stepBlocks = new ArrayList<>();
     }
 
     public Date getLastEditDate() {

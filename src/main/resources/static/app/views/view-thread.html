@@ -67,7 +67,7 @@
                     <tr ng-repeat="step in instruction.steps">
                         <td>{{$index+1}}</td>
                         <td>
-                            <a href="#/view-thread/{{instruction.id}}/step/{{$index+1}}" target="_blank">{{step.name}}</a>
+                            <a href="#/view-thread/{{instruction.id}}/step/{{$index+1}}">{{step.name}}</a>
                         </td>
                         <td>{{step.creatorName}}</td>
                         <td>{{step.stepComments.length}}</td>

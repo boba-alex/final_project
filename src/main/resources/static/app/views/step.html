@@ -23,6 +23,31 @@
                     <h1>Blocks</h1>
                 </div>
 
+                <div class="col-xs-12 col-sm-8">
+                    <form ng-submit="submit()" name="userForm" novalidate>
+                        <div class="form-group">
+                            <label for="name"></label> <label
+                                ng-model="step.creatorName=user.username"
+                                id="creatorName"
+                                name="name"></label>
+                        </div>
+
+                        <div class="form-group"
+                             ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
+                            <label for="name">Block :</label>
+                            <input type="text" required
+                                   class="form-control" ng-model="block.text"
+                                   id="name"
+                                   name="text">
+                        </div>
+
+                        <button type="submit" class="btn btn-default"
+                                ng-disabled="userForm.$invalid">{{buttonText}}
+                        </button>
+                        <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
+                    </form>
+                </div>
+
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -58,7 +83,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-default btn-sm"
-                                    ng-click="deleteUser(instruction)">
+                                    ng-click="deleteUser(block)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </td>

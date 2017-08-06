@@ -1,9 +1,10 @@
 angular.module('JWTDemoApp')
 // Creating the Angular Controller
     .controller('StepController', function ($http, $scope, AuthService) {
-        var edit = false;
+        var edit = true;
         $scope.buttonText = 'Create';
         $scope.nameurl = 'Submit';
+
 
         //For everything else
         var init = function () {
@@ -33,8 +34,8 @@ angular.module('JWTDemoApp')
             $scope.message = '';
             $scope.buttonText = 'Create';
         };
-        $scope.deleteUser = function (instruction) {
-            $http.delete('step/' + instruction.id).success(function (res) {
+        $scope.deleteUser = function (block) {
+            $http.delete('step/' + $scope.step.id + '/' + block.id + '/' + AuthService.user.id).success(function (res) {
                 $scope.deleteMessage = "Success!";
                 init();
             }).error(function (error) {
@@ -42,8 +43,10 @@ angular.module('JWTDemoApp')
             });
         };
         var editUser = function () {
-            $http.put('step', $scope.instruction).success(function (res) {
-                $scope.instruction = null;
+            var currentLocation = window.location.toString().split('/')[5] + ' '
+                + window.location.toString().split('/')[7];
+            $http.put('step/' + $scope.step.id + '/' + AuthService.user.id, $scope.block).success(function (res) {
+                $scope.block = null;
                 $scope.confirmPassword = null;
                 $scope.userForm.$setPristine();
                 $scope.message = "Editting Success";

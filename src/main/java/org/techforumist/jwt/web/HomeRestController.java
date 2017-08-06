@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.techforumist.jwt.domain.step.StepBlock;
 import org.techforumist.jwt.domain.user.AppUser;
 import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.domain.user.UserProfile;
@@ -27,6 +28,7 @@ import org.techforumist.jwt.repository.AppUserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.techforumist.jwt.repository.InstructionRepository;
+import org.techforumist.jwt.repository.StepBlockRepository;
 import org.techforumist.jwt.repository.StepRepository;
 
 /**
@@ -45,6 +47,9 @@ public class HomeRestController {
 
 	@Autowired
 	private StepRepository stepRepository;
+
+	@Autowired
+	private StepBlockRepository stepBlockRepository;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<AppUser> createUser(@RequestBody AppUser appUser) {
@@ -138,6 +143,41 @@ public class HomeRestController {
 		}
 	}
 
+	@RequestMapping(value = "/step/{id}/{userID}", method = RequestMethod.PUT)
+	public void createBlock(@PathVariable Long id, @PathVariable Long userID, @RequestBody StepBlock stepBlock) {
+		Step step = stepRepository.findOne(id);
+		AppUser appUser = appUserRepository.findOne(userID);
+		if (step.getCreatorName().equals(appUser.getUsername())){
+			step.getStepBlocks().add(stepBlock);
+			stepRepository.save(step);
+			return;
+		} else if (appUser.getRoles().contains("ADMIN")){
+			step.getStepBlocks().add(stepBlock);
+			stepRepository.save(step);
+		}
+	}
+
+	@RequestMapping(value = "/step/{stepID}/{stepBlockID}/{userID}", method = RequestMethod.DELETE)
+	public void deleteStepBlock(@PathVariable Long stepID, @PathVariable Long stepBlockID, @PathVariable Long userID) {
+		StepBlock stepBlock = stepBlockRepository.findOne(stepBlockID);
+		Step step = stepRepository.findOne(stepID);
+		AppUser appUser = appUserRepository.findOne(userID);
+		if(step.getCreatorName().equals(appUser.getUsername())){
+			List<StepBlock> stepBlocks = step.getStepBlocks();
+			stepBlocks.remove(stepBlock);
+			step.setStepBlocks(stepBlocks);
+			stepRepository.save(step);
+			stepBlockRepository.delete(stepBlock);
+			return;
+		} else if(appUser.getRoles().contains("ADMIN")){
+			List<StepBlock> stepBlocks = step.getStepBlocks();
+			stepBlocks.remove(stepBlock);
+			step.setStepBlocks(stepBlocks);
+			stepRepository.save(step);
+			stepBlockRepository.delete(stepBlock);
+		}
+	}
+	
 	@RequestMapping(value = "/view-thread/{id}", method = RequestMethod.GET)
 	public Instruction userss(@PathVariable Long id) {
 		return instructionRepository.findOne(id);
