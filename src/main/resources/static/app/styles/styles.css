@@ -20,6 +20,9 @@ body{
 footer{
     margin-top: 320px;
 }
+.content-den{
+    min-height: calc(100vh - 80px);
+}
 /*.panel-blue{*/
     /*background-color: #003399;*/
     /*color: blue;*/

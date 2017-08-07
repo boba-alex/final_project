@@ -62,7 +62,7 @@ public class HomeRestController {
 		instructions.add(instruction);
 
 		UserProfile userProfile = new UserProfile();
-		userProfile.setReserve(appUser.getUsername());
+		userProfile.setAppUser(appUser);
 		roles.add("USER");
 
 		appUser.setRoles(roles);

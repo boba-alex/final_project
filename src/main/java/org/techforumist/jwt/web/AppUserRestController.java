@@ -18,6 +18,7 @@ import org.techforumist.jwt.domain.step.Step;
 import org.techforumist.jwt.domain.comment.InstructionComment;
 import org.techforumist.jwt.domain.comment.StepComment;
 import org.techforumist.jwt.domain.step.StepBlock;
+import org.techforumist.jwt.domain.user.UserProfile;
 import org.techforumist.jwt.repository.AchievementRepository;
 import org.techforumist.jwt.repository.AppUserRepository;
 import org.techforumist.jwt.repository.InstructionRepository;
@@ -138,7 +139,9 @@ public class AppUserRestController {
 
 		System.out.println(instruction.getName() + " " + instruction.getCategory() +
 				" " +instruction.getTags());
+
 		AppUser appUser = appUserRepository.findOneByUsername(instruction.getCreatorName());
+		System.out.println(appUser);
 		if (appUser == null ){
 			System.out.println("null");
 			return;
@@ -341,6 +344,28 @@ public class AppUserRestController {
 		step.setStepComments(stepComments);
 
 		stepRepository.save(step);
+	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public List<AppUser> profile() {
+		return appUserRepository.findAll();
+	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.PUT)
+	public void editProfile(@RequestBody UserProfile userProfile) {
+
+		System.out.println(userProfile.getCity());
+		AppUser appUser = appUserRepository.findOneByUsername(userProfile.getCreatorName());
+		if (appUser == null ){
+			System.out.println("null");
+			return;
+		}
+
+		appUser.setUserProfile(userProfile);
+//		chekAchivements(appUser.getUsername());
+		appUserRepository.save(appUser);
+
+//		addStep(appUser.getInstruction().get(appUser.getInstruction().size()-1));
 	}
 
 }

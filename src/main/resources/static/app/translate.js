@@ -44,7 +44,11 @@ angular.module('JWTDemoApp')
             BRONZE_INSTRUCTION_CREATOR: 'Bronze instruction creator',
             FOR_MAKE_0_INSTRUCTIONS: 'For make 0 instructions!',
             BRONZE_STEP_CREATOR: 'For make 0 steps!',
-            ACHIEVEMENTS: 'Achievements'
+            ACHIEVEMENTS: 'Achievements',
+            COUNTRY: 'Country',
+            CITY: 'City',
+            UNIVERSITY: 'University',
+            JOB: 'Job'
 
 
         });
@@ -89,7 +93,12 @@ angular.module('JWTDemoApp')
             BRONZE_INSTRUCTION_CREATOR: 'Бронзовый создатель инструкций',
             FOR_MAKE_0_INSTRUCTIONS: 'За 0 инструкций!',
             BRONZE_STEP_CREATOR: 'За 0 шагов!',
-            ACHIEVEMENTS: 'Награды'
+            ACHIEVEMENTS: 'Награды',
+            COUNTRY: 'Страна',
+            CITY: 'Город',
+            UNIVERSITY: 'Университет',
+            JOB: 'Профессия'
+
         });
         // Устанавливаем язык по умолчанию
         $translateProvider.preferredLanguage('en');
