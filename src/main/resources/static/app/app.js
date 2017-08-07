@@ -20,6 +20,8 @@ angular.module('JWTDemoApp', [ 'ui.router' , 'pascalprecht.translate'])
                     && toState.name != 'instructions'
                     && toState.name != 'view-thread'
                     && toState.name != 'view-thread/{id}'
+                    && toState.name != 'view-profile'
+                    && toState.name != 'view-profile/{id}'
                     && toState.name != 'step'
                     && toState.name != 'step/{id}'
                     && toState.name != '/view-thread/step'

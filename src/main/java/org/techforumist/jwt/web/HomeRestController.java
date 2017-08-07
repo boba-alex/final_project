@@ -25,13 +25,10 @@ import org.techforumist.jwt.domain.user.AppUser;
 import org.techforumist.jwt.domain.Instruction;
 import org.techforumist.jwt.domain.user.UserProfile;
 import org.techforumist.jwt.domain.step.Step;
-import org.techforumist.jwt.repository.AppUserRepository;
+import org.techforumist.jwt.repository.*;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.techforumist.jwt.repository.InstructionRepository;
-import org.techforumist.jwt.repository.StepBlockRepository;
-import org.techforumist.jwt.repository.StepRepository;
 
 /**
  * All web services in this controller will be available for all the users
@@ -132,6 +129,7 @@ public class HomeRestController {
 		return null;
 	}
 
+
 	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
 	public List<Instruction> users() {
 		return instructionRepository.findAll();
@@ -221,6 +219,12 @@ public class HomeRestController {
 	public Step step(@PathVariable String id) {
 		Instruction instruction = instructionRepository.findOne(Long.parseLong(id.split(" ")[0]));
 		return instruction.getSteps().get(Integer.parseInt(id.split(" ")[1])-1);
+	}
+
+	@RequestMapping(value = "/view-profile/{id}", method = RequestMethod.GET)
+	public AppUser profile(@PathVariable Long id) {
+		System.out.println("view-profile");
+		return appUserRepository.findOne(id);
 	}
 
 

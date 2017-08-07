@@ -119,6 +119,15 @@ angular.module('JWTDemoApp').config(function ($stateProvider, $urlRouterProvider
                 controller: 'StepController'
             }
         }
+    }).state('view-profile', {//1
+        parent: 'nav',
+        url: '/view-profile/{id}',
+        views: {
+            'content@': {
+                templateUrl: 'app/views/view-profile.html',
+                controller: 'View-profileController'
+            }
+        }
     });
 
 });
