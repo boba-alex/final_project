@@ -80,11 +80,12 @@ angular.module('JWTDemoApp')
             });
         };
         var addUser = function(){
-            $http.post('view-thread', $scope.instruction).success(function(res) {
-                $scope.instruction = null;
+            var currentLocation = window.location.toString().split('/')[5];
+            $http.post('view-thread/' + currentLocation, $scope.instructionComment).success(function(res) {
+                $scope.instructionComment = null;
                 $scope.confirmPassword = null;
-                $scope.userForm.$setPristine();
-                $scope.message = "User Created";
+                $scope.commentForm.$setPristine();
+                $scope.message = "Comment Created";
                 init();
             }).error(function(error) {
                 $scope.message = error.message;
@@ -97,6 +98,9 @@ angular.module('JWTDemoApp')
                 addUser();
             }
         };
+        $scope.submitComment = function () {
+            addUser();
+        }
         init();
 
     });

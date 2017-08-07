@@ -4,7 +4,7 @@ angular.module('JWTDemoApp')
         var edit = true;
         $scope.buttonText = 'Create';
         $scope.nameurl = 'Submit';
-
+        $scope.user = AuthService.user;
 
         //For everything else
         var init = function () {
@@ -56,11 +56,11 @@ angular.module('JWTDemoApp')
             });
         };
         var addUser = function () {
-            $http.post('step', $scope.instruction).success(function (res) {
-                $scope.instruction = null;
+            $http.post('step/' + $scope.step.id, $scope.stepComment).success(function (res) {
+                $scope.stepComment = null;
                 $scope.confirmPassword = null;
                 $scope.userForm.$setPristine();
-                $scope.message = "User Created";
+                $scope.message = "Comment Created";
                 init();
             }).error(function (error) {
                 $scope.message = error.message;
@@ -73,6 +73,9 @@ angular.module('JWTDemoApp')
                 addUser();
             }
         };
+        $scope.submitComment = function () {
+            addUser();
+        }
         init();
 
     });

@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.techforumist.jwt.domain.comment.InstructionComment;
+import org.techforumist.jwt.domain.comment.StepComment;
 import org.techforumist.jwt.domain.step.StepBlock;
 import org.techforumist.jwt.domain.user.AppUser;
 import org.techforumist.jwt.domain.Instruction;
@@ -96,6 +98,38 @@ public class HomeRestController {
 			tokenMap.put("token", null);
 			return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.UNAUTHORIZED);
 		}
+	}
+
+	@RequestMapping(value = "/view-thread/{id}", method = RequestMethod.POST)
+	public ResponseEntity<StepComment> createInstructionComment(@PathVariable Long id, @RequestBody InstructionComment instructionComment) {
+		Instruction instruction = instructionRepository.findOne(id);
+		System.out.println("here");
+		System.out.println("id: " + id);
+		System.out.println("Creator: " + instructionComment.getCreatorName());
+		System.out.println("Creator: " + instructionComment.getText());
+		System.out.println(instructionComment.getCreatorName().equals(""));
+
+		if(!instructionComment.getCreatorName().equals("")){
+			instruction.getInstructionComments().add(instructionComment);
+			instructionRepository.save(instruction);
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/step/{id}", method = RequestMethod.POST)
+	public ResponseEntity<StepComment> createStepComment(@PathVariable Long id, @RequestBody StepComment stepComment) {
+		Step step = stepRepository.findOne(id);
+		System.out.println("here2");
+		System.out.println("id: " + id);
+		System.out.println("Creator: " + stepComment.getCreatorName());
+		System.out.println("Creator: " + stepComment.getText());
+		System.out.println(stepComment.getCreatorName().equals(""));
+
+		if(!stepComment.getCreatorName().equals("")){
+			step.getStepComments().add(stepComment);
+			stepRepository.save(step);
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/instructions", method = RequestMethod.GET)
@@ -177,7 +211,7 @@ public class HomeRestController {
 			stepBlockRepository.delete(stepBlock);
 		}
 	}
-	
+
 	@RequestMapping(value = "/view-thread/{id}", method = RequestMethod.GET)
 	public Instruction userss(@PathVariable Long id) {
 		return instructionRepository.findOne(id);

@@ -116,6 +116,32 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
+
+                                        <div class="col-xs-12 col-sm-8">
+                                            <form ng-submit="submitComment()" name="commentForm" novalidate>
+                                                <div class="form-group">
+                                                    <label for="name"></label> <label
+                                                        ng-model="instructionComment.creatorName=user.username"
+                                                        id="commentCreator"
+                                                        name="name">{{user.username}}</label>
+                                                </div>
+
+                                                <div class="form-group"
+                                                     ng-class="{ 'has-error': commentForm.name.$invalid && commentForm.name.$dirty }">
+                                                    <label for="name">Add a public comment...</label>
+                                                    <input type="text" required
+                                                           class="form-control" ng-model="instructionComment.text"
+                                                           id="nameComment"
+                                                           name="name">
+                                                </div>
+
+                                                <button type="submitComment" class="btn btn-default"
+                                                        ng-disabled="commentForm.$invalid">Comment
+                                                </button>
+                                                <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
+                                            </form>
+                                        </div>
+
                                         <div class="pull-right">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
@@ -173,6 +199,9 @@
 
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>

@@ -20,6 +20,7 @@ public class Comment {
     public Comment() {
         this.creationDate = new Date();
         this.lastEditDate = this.creationDate;
+        this.creatorName = new String();
     }
 
     public Long getId() {
